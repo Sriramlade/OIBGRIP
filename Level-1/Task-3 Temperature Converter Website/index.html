@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title>Temperature Converter</title>
+        <link rel="stylesheet" href="mystyle.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			margin-top: 50px;
+              background-image: url('file:///C:/Users/lenovo/Desktop/temp.webp');
+		}
+
+		input[type="number"] {
+			padding: 5px;
+			margin: 10px;
+			width: 200px;
+		}
+
+		select {
+			padding: 5px;
+			margin: 10px;
+		}
+
+		button {
+			padding: 10px;
+			margin-top: 10px;
+			background-color: grey;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		#result {
+			margin-top: 20px;
+			font-size: 20px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Temperature Converter</h1>
+	<label for="temp">Enter Temperature:</label>
+	<input type="number" id="temp" name="temp" placeholder="Enter temperature..." required>
+	<br>
+	<label for="unit">Select Unit:</label>
+	<select id="unit" name="unit">
+		<option value="celsius">Celsius</option>
+		<option value="fahrenheit">Fahrenheit</option>
+		<option value="kelvin">Kelvin</option>
+	</select>
+	<br>
+	<button onclick="convert()">Convert</button>
+	<div id="result"></div>
+
+	<script>
+		function convert() {
+			let temp = document.getElementById("temp").value;
+			let unit = document.getElementById("unit").value;
+			let result = document.getElementById("result");
+
+			if (!temp || isNaN(temp)) {
+				alert("Please enter a valid temperature!");
+				return;
+			}
+
+			if (unit === "celsius") {
+				let fahrenheit = (temp * 9/5) + 32;
+				let kelvin = parseFloat(temp) + 273.15;
+				result.innerHTML = `${temp} &#8451; = ${fahrenheit.toFixed(2)} &#8457; = ${kelvin.toFixed(2)} K`;
+			} else if (unit === "fahrenheit") {
+				let celsius = (temp - 32) * 5/9;
+				let kelvin = (temp - 32) * 5/9 + 273.15;
+				result.innerHTML = `${temp} &#8457; = ${celsius.toFixed(2)} &#8451; = ${kelvin.toFixed(2)} K`;
+			} else if (unit === "kelvin") {
+				let celsius = temp - 273.15;
+				let fahrenheit = (temp - 273.15) * 9/5 + 32;
+				result.innerHTML = `${temp} K = ${celsius.toFixed(2)} &#8451; = ${fahrenheit.toFixed(2)} &#8457;`;
+			}
+		}
+	</script>
+</body>
+</html>
